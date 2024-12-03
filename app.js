@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const mysql = require('mysql');
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 const inventoryRoutes = require('./routes/inventory')
 const requestOrderRoutes = require('./routes/request_order_routes')
 // middlewares 
@@ -23,7 +23,7 @@ const connection = mysql.createConnection({
 connection.connect();
 
 
-
+console.log(process.env.PORT)
 
 app.listen(port, ()=> {
     console.log(`${connection.state}`)
