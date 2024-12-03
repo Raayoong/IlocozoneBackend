@@ -30,5 +30,5 @@ app.listen(port, ()=> {
 })
 
 
-module.exports = connection, app;
+module.exports = connection;
 
