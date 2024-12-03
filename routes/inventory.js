@@ -5,7 +5,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/view/inventory/:category', (req, res, next) => {
-  const db = require('../server')
+  const db = require('../app')
   const category = req.params.category
   const sql = "SELECT * FROM inventory WHERE category=? and qty=1"
   const sqlAll = "SELECT * FROM inventory WHERE qty=1"
@@ -18,7 +18,7 @@ router.get('/view/inventory/:category', (req, res, next) => {
 router.post('/insert/inventory', (req,res)=> {
   const date = new Date();
   const dateToday = date.getMonth() + '-' + date.getDate() + '-' + date.getFullYear()
-  const db = require('../server');
+  const db = require('../app');
   const {category, brand, model, qty, serial, date_transacted} = req.body;
   const sql = "INSERT INTO `inventory`(`category`, `brand`, `model`, `qty`, `serial`, `date_transacted`) VALUES (?,?,?,?,?,?)"
 
@@ -37,7 +37,7 @@ router.post('/insert/inventory', (req,res)=> {
 
 // delete single inventory
 router.delete('/delete/inventory/:id', (req, res)=> {
-  const db = require('../server');
+  const db = require('../app');
   const id = req.params.id
   const sql = `DELETE FROM inventory WHERE id=?`
 
@@ -55,7 +55,7 @@ router.delete('/delete/inventory/:id', (req, res)=> {
 router.put('/update/inventory/:usedSerial', (req,res,next)=> {
   const usedSerial = req.params.usedSerial
   const sql = `UPDATE inventory INNER JOIN request_orders ON inventory.serial = request_orders.used_serial SET qty=0 WHERE request_orders.used_serial=?`
-  const db = require('../server');
+  const db = require('../app');
   db.query(sql,usedSerial, (err,data)=> {
       if(err){
           res.status(400).send(err.message)
