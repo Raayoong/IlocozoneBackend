@@ -67,6 +67,24 @@ router.put('/update/inventory/:usedSerial', (req,res,next)=> {
   })
 })
 
+// get brand and model
+router.get(`/inventory/filter`, (req, res)=> {
+  const category = req.params.category
+  const sql = `SELECT DISTINCT brand, model from inventory WHERE category=${category}`
+  const db = require('../app');
+
+  db.query(sql, category, (err,data)=> {
+    if(err){
+      res.status(400).send(err.message);
+      console.log(err.message)
+    }
+    else{
+      res.status(200).json(data)
+    }
+    
+  })
+})
+
 // count stock
 router.get('/view/count/ONU/inventory')
 module.exports = router;
