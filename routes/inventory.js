@@ -70,7 +70,7 @@ router.put('/update/inventory/:usedSerial', (req,res,next)=> {
 // get brand and model
 router.get(`/inventory/filter/:category`, (req, res)=> {
   const category = req.params.category
-  const sql = `SELECT DISTINCT brand, model from brands WHERE category=?`
+  const sql = `SELECT DISTINCT brand_name, model from brands WHERE category=?`
   const db = require('../app');
 
   db.query(sql, category, (err,data)=> {
