@@ -106,7 +106,7 @@ router.get(`/inventory/filter/models/:category/:brand`, (req, res)=> {
 // add brands and models
 router.post(`/brands/new/`, (req,res)=> {
   const [brand, model, category] = req.body
-  const sql = "INSERT INTO `brands`(`brand_name`, `model`, `category`) VALUES (?,?,?)"
+  const sql = "INSERT INTO brands(brand_name, model, category) VALUES (?,?,?)"
   const db = require('../app');
 
   db.query(sql,[brand,model, category], (err,data)=> {
