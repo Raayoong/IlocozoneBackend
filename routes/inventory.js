@@ -103,6 +103,23 @@ router.get(`/inventory/filter/models/:category/:brand`, (req, res)=> {
   })
 })
 
+// add brands and models
+router.post(`/brands/new/`, (req,res)=> {
+  const [brand, model, category] = req.body
+  const sql = "INSERT INTO `brands`(`brand_name`, `model`, `category`) VALUES (?,?,?)"
+  const db = require('../app');
+
+  db.query(sql,[brand,model, category], (err,data)=> {
+    if(err){
+      res.status(400).send(err.message);
+      console.log(err.message)
+    }
+    else{
+      res.status(200).json(data)
+    }
+  })
+})
+
 // count stock
 router.get('/view/count/ONU/inventory')
 module.exports = router;
