@@ -39,7 +39,7 @@ router.put('/update/request_order/:id', (req,res,next)=> {
     const id = req.params.id;
     const status = req.body
     const db = require('../app');
-    db.query(sql, [id,status], (err,data)=> {
+    db.query(sql, [status,id], (err,data)=> {
         if(err){
             res.status(400).send(err.message);
             console.log(err.message, id, status)
