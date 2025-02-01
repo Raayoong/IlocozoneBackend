@@ -35,11 +35,11 @@ router.get('/list/request_order', (req,res,next)=> {
 
 // update status
 router.put('/update/request_order/:id', (req,res,next)=> {
-    const sql = 'UPDATE request_orders SET status=? WHERE id=?'
+    const sql = 'UPDATE request_orders SET status=?, transacted_date=? WHERE id=?'
     const id = req.params.id;
-    const {status} = req.body
+    const {status, transacted_date} = req.body;
     const db = require('../app');
-    db.query(sql, [status,id], (err,data)=> {
+    db.query(sql, [status,transacted_date,id], (err,data)=> {
         if(err){
             res.status(400).send(err.message);
             console.log(err.message, id, status)
