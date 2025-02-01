@@ -20,7 +20,7 @@ router.post('/new/request_order', (req,res,next)=> {
 
 // get request order list 
 router.get('/list/request_order', (req,res,next)=> {
-    const sql = 'SELECT * from request_orders WHERE status=0'
+    const sql = 'SELECT * from request_orders'
     const db = require('../app');
     db.query(sql, (err,data)=> {
         if(err){
