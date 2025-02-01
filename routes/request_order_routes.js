@@ -20,7 +20,7 @@ router.post('/new/request_order', (req,res,next)=> {
 
 // get request order list 
 router.get('/list/request_order', (req,res,next)=> {
-    const sql = 'SELECT * from request_orders'
+    const sql = 'SELECT * FROM `request_orders` ORDER BY transacted_date DESC'
     const db = require('../app');
     db.query(sql, (err,data)=> {
         if(err){
